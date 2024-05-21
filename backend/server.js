@@ -2,6 +2,7 @@ import express from "express"
 import authRoutes from "./routes/auth.routes.js"
 import dotenv from "dotenv"
 import connnectMongoDb from "./db/connectMongoDB.js";
+import cookieParser from "cookie-parser";
 
 
 dotenv.config();
@@ -9,6 +10,10 @@ dotenv.config();
 
 const app=express()
 const PORT=process.env.PORT || 4000
+
+app.use(express.json())                // to parse the req.body
+app.use(express.urlencoded({extended:true}))    //to parse form data
+app.use(cookieParser())   //if want toaccess the data from the cookie we need this middleware
 
 app.use("/api/auth",authRoutes)
 

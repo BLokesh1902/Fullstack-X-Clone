@@ -1,5 +1,6 @@
 import express from "express"
-import { login, logout, signup } from "../controllers/auth.controller.js";
+import { getMe, login, logout, signup } from "../controllers/auth.controller.js";
+import protectedRoute from "../middleware/protectedRoute.js"
 
 const router = express.Router()
 
@@ -9,6 +10,6 @@ router.post("/login",login)
 
 router.post("/logout",logout)
 
-// router.post("/signup",signup)
+router.post("/me",protectedRoute,getMe)
 
 export default router;
